@@ -1,0 +1,161 @@
+\documentclass[10pt]{article}
+\input{../templates/exam-note-template.tex}
+
+\begin{document}
+
+\begin{center}
+{\LARGE 5.3 Inverses, Cramer's Rule, Cross Products, and Volume\par}
+\end{center}
+\notesubtitle{Concise exam revision notes for adjugates, determinant geometry, and orientation.}
+\source{Based on handwritten MIT 18.06 revision notes.}
+
+\section{Core Idea}
+
+\labelnote{Core idea}{Determinants connect algebra and geometry: they decide invertibility, give formulas for inverse entries, and measure signed area or volume.}
+
+For an invertible square matrix,
+\[
+A^{-1}=\frac{1}{\det A}C^{T},
+\]
+where \(C\) is the cofactor matrix. Equivalently,
+\[
+(\det A)I=AC^{T}.
+\]
+
+\section{Cramer's Rule}
+
+For
+\[
+Ax=b,
+\]
+each variable is a determinant ratio:
+\[
+x_i=\frac{\det A_i(b)}{\det A},
+\]
+where \(A_i(b)\) is \(A\) with column \(i\) replaced by \(b\).
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.26\linewidth}Y@{}}
+\toprule
+Use Cramer's rule when & Avoid it when \\
+\midrule
+The matrix is small or symbolic. & The matrix is large and elimination is easier. \\
+You need a formula for one variable. & You need all variables numerically. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\labelnote{Common mistake}{Cramer's rule requires \(\det A\ne0\). If \(\det A=0\), the determinant ratios do not apply.}
+
+\section{Area from Determinants}
+
+For two vectors in the plane,
+\[
+u=
+\begin{bmatrix}
+a\\
+b
+\end{bmatrix},
+\qquad
+v=
+\begin{bmatrix}
+c\\
+d
+\end{bmatrix},
+\]
+the signed area of the parallelogram is
+\[
+\det
+\begin{bmatrix}
+a&c\\
+b&d
+\end{bmatrix}
+=ad-bc.
+\]
+The absolute value gives the geometric area:
+\[
+\text{area}=|ad-bc|.
+\]
+
+\section{Cross Product}
+
+In \(\mathbb{R}^3\), the cross product is perpendicular to both input vectors:
+\[
+u\times v\perp u,
+\qquad
+u\times v\perp v.
+\]
+Using unit vectors,
+\[
+u\times v=
+\det
+\begin{bmatrix}
+i&j&k\\
+u_1&u_2&u_3\\
+v_1&v_2&v_3
+\end{bmatrix}.
+\]
+Its length is the parallelogram area:
+\[
+\|u\times v\|=\|u\|\,\|v\|\sin\theta.
+\]
+
+\labelnote{Exam use}{Use cross product when a problem asks for a normal vector to a plane in \(\mathbb{R}^3\).}
+
+\section{Orientation}
+
+The determinant sign records orientation:
+\[
+\det A>0
+\]
+preserves orientation, while
+\[
+\det A<0
+\]
+reverses orientation.
+
+The scalar triple product gives signed volume:
+\[
+\det
+\begin{bmatrix}
+u_1&v_1&w_1\\
+u_2&v_2&w_2\\
+u_3&v_3&w_3
+\end{bmatrix}
+=(u\times v)\cdot w.
+\]
+If this determinant is zero, the three vectors lie in the same plane.
+
+\section{Common Mistakes}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.40\linewidth}Y@{}}
+\toprule
+Mistake & Correct exam habit \\
+\midrule
+Using Cramer's rule when \(\det A=0\). & First check invertibility. \\
+Forgetting the transpose in the inverse formula. & Use \(A^{-1}=C^{T}/\det A\). \\
+Dropping the sign of area too early. & Use signed area for orientation; absolute value for size. \\
+Writing \(u\times v=v\times u\). & Cross product changes sign: \(v\times u=-(u\times v)\). \\
+Using cross product outside \(\mathbb{R}^3\). & The standard cross product is a 3D tool. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Final Exam Checklist}
+
+\tightlabel{Checklist}
+\begin{enumerate}
+  \item Check whether \(\det A\ne0\) before using inverse formulas.
+  \item Build the cofactor matrix \(C\).
+  \item Use \(A^{-1}=C^{T}/\det A\).
+  \item For Cramer's rule, replace one column at a time by \(b\).
+  \item Use determinant sign for orientation.
+  \item Use absolute determinant for area or volume size.
+  \item Use \(u\times v\) for a normal vector in \(\mathbb{R}^3\).
+  \item Check \(u\cdot(u\times v)=0\) and \(v\cdot(u\times v)=0\).
+\end{enumerate}
+
+\end{document}

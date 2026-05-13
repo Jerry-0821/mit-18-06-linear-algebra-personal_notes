@@ -1,0 +1,113 @@
+\documentclass[10pt]{article}
+\input{../templates/exam-note-template.tex}
+
+\begin{document}
+
+\begin{center}
+{\LARGE Complete Solutions Worked Example\par}
+\end{center}
+\notesubtitle{Concise revision notes for reading free variables, special solutions, and \(x=x_p+x_n\).}
+\source{Based on handwritten MIT 18.06 revision notes.}
+
+\section{Core Idea}
+
+\labelnote{Core idea}{A system with free variables has infinitely many solutions. One particular solution solves \(Ax=b\); special solutions describe all movement inside \(N(A)\).}
+
+The final answer has the form
+\[
+x=x_p+x_n.
+\]
+If \(s_1,\ldots,s_k\) are special solutions, then
+\[
+x=x_p+c_1s_1+\cdots+c_ks_k.
+\]
+
+\section{Reading Free Variables}
+
+Free variables come from columns without pivots. In a reduced system, set each free variable one at a time to create nullspace directions.
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.28\linewidth}Y@{}}
+\toprule
+Variable type & Meaning \\
+\midrule
+Pivot variable & Forced by the equations. \\
+Free variable & Chosen freely; creates a nullspace direction. \\
+Particular choice & Usually set free variables to simple values to solve \(Ax=b\). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Particular Solution}
+
+For a consistent system
+\[
+Ax=b,
+\]
+choose convenient free variable values, often zeros, and solve for pivot variables. This gives one particular solution
+\[
+x_p.
+\]
+It is not the whole answer unless the nullspace is zero.
+
+\section{Special Solutions}
+
+To find the nullspace, solve
+\[
+Ax=0.
+\]
+For each free variable:
+\begin{enumerate}
+  \item set that free variable to \(1\);
+  \item set the other free variables to \(0\);
+  \item solve for pivot variables.
+\end{enumerate}
+
+The resulting vectors \(s_1,\ldots,s_k\) form a basis for \(N(A)\):
+\[
+N(A)=\operatorname{span}\{s_1,\ldots,s_k\}.
+\]
+
+\section{Putting the Answer Together}
+
+If one particular solution is \(x_p\) and the nullspace basis is \(s_1,s_2\), write
+\[
+x=x_p+c_1s_1+c_2s_2.
+\]
+The constants \(c_1,c_2\) are arbitrary.
+
+\labelnote{Meaning}{The particular solution reaches \(b\). The nullspace part moves without changing \(Ax\).}
+
+\section{Common Mistakes}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.40\linewidth}Y@{}}
+\toprule
+Mistake & Correct exam habit \\
+\midrule
+Giving only \(x_p\). & Add the full nullspace. \\
+Using \(Ax=b\) to find special solutions. & Use \(Ax=0\). \\
+Multiplying \(x_p\) by arbitrary constants. & Constants multiply only nullspace directions. \\
+Forgetting one free variable. & Number of special solutions equals number of free variables. \\
+Choosing complicated free values. & Use \(0\)'s and \(1\)'s unless the system suggests otherwise. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Final Exam Checklist}
+
+\tightlabel{Checklist}
+\begin{enumerate}
+  \item Row-reduce the augmented matrix \([A\ b]\).
+  \item Check consistency.
+  \item Mark pivot variables and free variables.
+  \item Choose simple free-variable values to get \(x_p\).
+  \item Solve \(Ax=0\) for special solutions.
+  \item Create one special solution per free variable.
+  \item Write \(x=x_p+c_1s_1+\cdots+c_ks_k\).
+  \item Check by substituting: \(Ax_p=b\) and \(As_i=0\).
+\end{enumerate}
+
+\end{document}

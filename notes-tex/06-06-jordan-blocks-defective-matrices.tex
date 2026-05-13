@@ -1,0 +1,134 @@
+\documentclass[10pt]{article}
+\input{../templates/exam-note-template.tex}
+
+\begin{document}
+
+\begin{center}
+{\LARGE Jordan Blocks and Defective Matrices\par}
+\end{center}
+\notesubtitle{Exam notes for repeated eigenvalues, missing eigenvectors, and Jordan form.}
+\source{Based on handwritten MIT 18.06 revision notes.}
+
+\section{Core Idea}
+
+\labelnote{Core idea}{Repeated eigenvalues do not guarantee enough eigenvectors. When a matrix is missing eigenvectors, Jordan blocks replace diagonal form.}
+
+Diagonalization is the best case:
+\[
+A=S\Lambda S^{-1}.
+\]
+This works only when \(A\) has a full basis of independent eigenvectors.
+
+\section{Diagonalizable vs Defective}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.30\linewidth}Y Y@{}}
+\toprule
+Case & Meaning & Exam signal \\
+\midrule
+Diagonalizable & Enough independent eigenvectors to form \(S\). & Each eigenspace supplies the needed number of vectors. \\
+Defective & Not enough independent eigenvectors. & Some repeated eigenvalue has too small a nullspace. \\
+Jordan form & Replacement for diagonal form. & Ones appear just above the diagonal inside a block. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Algebraic and Geometric Multiplicity}
+
+For an eigenvalue \(\lambda\):
+\[
+m_a(\lambda)=\text{multiplicity of }\lambda\text{ in }\det(A-\lambda I),
+\]
+\[
+m_g(\lambda)=\dim N(A-\lambda I).
+\]
+
+The exam test is:
+\[
+A\text{ is diagonalizable}
+\quad\Longleftrightarrow\quad
+m_g(\lambda)=m_a(\lambda)\text{ for every }\lambda.
+\]
+
+If \(m_g(\lambda)<m_a(\lambda)\), the matrix is defective for that eigenvalue.
+
+\section{Jordan Blocks}
+
+A Jordan block for eigenvalue \(\lambda\) has \(\lambda\) on the diagonal and ones on the superdiagonal:
+\[
+J_{\lambda}=
+\begin{bmatrix}
+\lambda & 1 & 0\\
+0 & \lambda & 1\\
+0 & 0 & \lambda
+\end{bmatrix}.
+\]
+
+The diagonal part gives the eigenvalue. The superdiagonal ones record the missing eigenvector directions.
+
+\section{Jordan Form}
+
+Instead of diagonalizing, a defective matrix may be written as
+\[
+A=MJM^{-1},
+\]
+where \(J\) is block diagonal with Jordan blocks.
+
+A diagonal matrix is the special case where every Jordan block has size \(1\).
+
+\section{Generalized Eigenvectors}
+
+If \(x\) is an eigenvector, then
+\[
+(A-\lambda I)x=0.
+\]
+
+A generalized eigenvector \(w\) may satisfy
+\[
+(A-\lambda I)w=x.
+\]
+
+Together, \(w\) and \(x\) form a chain. This chain supplies the columns of \(M\) for the Jordan block.
+
+\section{Exam Method}
+
+\begin{enumerate}
+  \item Find eigenvalues from \(\det(A-\lambda I)=0\).
+  \item For each repeated eigenvalue, compute \(N(A-\lambda I)\).
+  \item Compare \(m_g(\lambda)\) with \(m_a(\lambda)\).
+  \item If all match, diagonalize.
+  \item If one fails, use Jordan blocks for that eigenvalue.
+\end{enumerate}
+
+\section{Common Mistakes}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.40\linewidth}Y@{}}
+\toprule
+Mistake & Correct exam habit \\
+\midrule
+Assuming repeated eigenvalues mean defective. & Check the dimension of the eigenspace. \\
+Assuming distinct eigenvalues are required. & Repeated eigenvalues can still be diagonalizable. \\
+Counting algebraic multiplicity as eigenvectors. & Count independent vectors in \(N(A-\lambda I)\). \\
+Forgetting the superdiagonal ones in a Jordan block. & A nontrivial block has ones above the diagonal. \\
+Treating \(A=MJM^{-1}\) as diagonalization. & Jordan form is weaker than diagonal form. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Final Exam Checklist}
+
+\tightlabel{Checklist}
+\begin{enumerate}
+  \item Compute the characteristic polynomial.
+  \item List algebraic multiplicities.
+  \item Compute eigenspace dimensions.
+  \item Compare \(m_a(\lambda)\) and \(m_g(\lambda)\).
+  \item Use diagonal form if enough eigenvectors exist.
+  \item Use Jordan blocks when eigenvectors are missing.
+  \item Check that the total block sizes add to \(n\).
+\end{enumerate}
+
+\end{document}

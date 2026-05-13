@@ -1,0 +1,232 @@
+\documentclass[10pt]{article}
+\input{../templates/exam-note-template.tex}
+
+\begin{document}
+
+\begin{center}
+{\LARGE 6.3--6.5 Matrix Exponentials, Symmetric Matrices, and Positive Definiteness\par}
+\end{center}
+\notesubtitle{Concise exam revision notes for continuous systems, symmetric eigenvectors, and positive definite tests.}
+\source{Based on handwritten MIT 18.06 revision notes.}
+
+\section{Core Idea}
+
+\labelnote{Core idea}{Eigenvectors decouple matrix problems. For symmetric matrices, the decoupling is especially clean because the eigenvectors can be chosen orthonormal.}
+
+The same eigenvalue idea controls:
+\[
+\frac{du}{dt}=Au,
+\qquad
+S=Q\Lambda Q^{T},
+\qquad
+x^{T}Sx.
+\]
+
+\section{Differential Equations}
+
+For the system
+\[
+\frac{du}{dt}=Au,
+\]
+if \(A\) has independent eigenvectors \(x_1,\ldots,x_n\), then the solution has the form
+\[
+u(t)=c_1e^{\lambda_1t}x_1+\cdots+c_ne^{\lambda_nt}x_n.
+\]
+The constants come from the initial condition:
+\[
+Sc=u(0),
+\qquad
+c=S^{-1}u(0).
+\]
+
+In matrix form,
+\[
+u(t)=e^{At}u(0),
+\qquad
+e^{At}=Se^{\Lambda t}S^{-1}.
+\]
+Here
+\[
+e^{\Lambda t}=
+\begin{bmatrix}
+e^{\lambda_1t}&0&\cdots&0\\
+0&e^{\lambda_2t}&\cdots&0\\
+\vdots&\vdots&\ddots&\vdots\\
+0&0&\cdots&e^{\lambda_nt}
+\end{bmatrix}.
+\]
+
+\section{Continuous Stability}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.32\linewidth}Y@{}}
+\toprule
+Eigenvalues of \(A\) & Behavior of \(e^{At}\) \\
+\midrule
+All \(\operatorname{Re}\lambda<0\) & Decays to zero. \\
+Some \(\operatorname{Re}\lambda>0\) & Blows up in that direction. \\
+One \(\lambda=0\), rest \(\operatorname{Re}\lambda<0\) & Possible steady state. \\
+Complex \(\lambda=a+ib\) & \(a\) controls growth/decay; \(b\) controls oscillation. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\labelnote{Exam memory}{For powers use \(|\lambda|\). For differential equations use \(\operatorname{Re}\lambda\).}
+
+\section{Defective Matrices}
+
+A repeated eigenvalue may not give enough eigenvectors. Then \(S\) is not invertible, so
+\[
+A=S\Lambda S^{-1}
+\]
+is impossible.
+
+For a defective repeated eigenvalue, a generalized eigenvector can replace a missing eigenvector:
+\[
+(A-\lambda I)w=x.
+\]
+This creates terms involving \(te^{\lambda t}\) in differential equations.
+
+\labelnote{Scope}{For exam revision, first try ordinary eigenvectors. Use generalized eigenvectors only when the matrix is defective.}
+
+\section{Symmetric Matrices}
+
+For a real symmetric matrix
+\[
+S=S^{T}.
+\]
+The key facts are:
+\begin{itemize}
+  \item all eigenvalues are real;
+  \item eigenvectors for different eigenvalues are orthogonal;
+  \item the eigenvectors can be chosen orthonormal.
+\end{itemize}
+
+Therefore a symmetric matrix factors as
+\[
+S=Q\Lambda Q^{T}.
+\]
+Equivalently,
+\[
+S=\lambda_1q_1q_1^{T}+\cdots+\lambda_nq_nq_n^{T}.
+\]
+
+\labelnote{Exam trigger}{If the matrix is symmetric, look for orthogonal eigenvectors and use \(Q^{T}=Q^{-1}\).}
+
+\section{Positive Definite Matrices}
+
+For a symmetric matrix \(S\), positive definite means
+\[
+x^{T}Sx>0
+\qquad
+\text{for every }x\ne0.
+\]
+Equivalent tests:
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.30\linewidth}Y@{}}
+\toprule
+Test & Positive definite condition \\
+\midrule
+Eigenvalues & All \(\lambda_i>0\). \\
+Pivots & All pivots are positive. \\
+Leading determinants & All leading principal determinants are positive. \\
+Quadratic form & \(x^{T}Sx>0\) for all \(x\ne0\). \\
+Factorization & \(S=R^{T}R\) with independent columns in \(R\). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+For \(2\times2\)
+\[
+S=
+\begin{bmatrix}
+a&b\\
+b&c
+\end{bmatrix},
+\]
+the quick test is
+\[
+a>0,
+\qquad
+ac-b^{2}>0.
+\]
+
+\section{Positive Semidefinite}
+
+Positive semidefinite means
+\[
+x^{T}Sx\ge0
+\qquad
+\text{for every }x.
+\]
+Then eigenvalues are nonnegative:
+\[
+\lambda_i\ge0.
+\]
+It may be singular:
+\[
+\det S=0
+\]
+is allowed.
+
+\labelnote{Common mistake}{Positive semidefinite is not the same as positive definite. Zero eigenvalues are allowed only in the semidefinite case.}
+
+\section{Similarity and Transpose}
+
+Similar matrices have the form
+\[
+B=M^{-1}AM.
+\]
+They have the same eigenvalues because they represent the same linear map in different coordinates.
+
+A matrix and its transpose have the same eigenvalues:
+\[
+\det(A^{T}-\lambda I)=\det(A-\lambda I).
+\]
+But their eigenvectors do not have to be the same.
+
+\section{Quadratic Forms and Axes}
+
+A symmetric matrix rotates quadratic forms into principal axes:
+\[
+x^{T}Sx=(Q^{T}x)^{T}\Lambda(Q^{T}x).
+\]
+For an ellipse, the eigenvectors give the axis directions and the eigenvalues control the axis lengths.
+
+\section{Common Mistakes}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.40\linewidth}Y@{}}
+\toprule
+Mistake & Correct exam habit \\
+\midrule
+Using \(|\lambda|\) for differential equation stability. & Use \(\operatorname{Re}\lambda\). \\
+Assuming repeated eigenvalues give enough eigenvectors. & Check the eigenspace dimension. \\
+Using \(Q\Lambda Q^{T}\) for a non-symmetric matrix. & Reserve that clean form for symmetric matrices. \\
+Testing positive definiteness without symmetry. & The standard tests here assume a symmetric matrix. \\
+Confusing semidefinite with definite. & Positive definite needs strict positivity and no zero eigenvalues. \\
+Assuming \(A\) and \(A^{T}\) have the same eigenvectors. & They have the same eigenvalues, not necessarily the same eigenvectors. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Final Exam Checklist}
+
+\tightlabel{Checklist}
+\begin{enumerate}
+  \item For \(u'=Au\), find eigenvalues and eigenvectors of \(A\).
+  \item Write \(u(t)=\sum c_ie^{\lambda_it}x_i\) when \(A\) has enough eigenvectors.
+  \item Use \(Sc=u(0)\) to find constants.
+  \item Use \(\operatorname{Re}\lambda\) to decide continuous stability.
+  \item Check symmetry before using \(S=Q\Lambda Q^{T}\).
+  \item For a symmetric matrix, choose eigenvectors orthonormal.
+  \item Test positive definiteness by eigenvalues, pivots, leading determinants, or \(x^{T}Sx\).
+  \item Treat zero eigenvalues as semidefinite, not definite.
+  \item Use similarity to preserve eigenvalues, not necessarily eigenvectors.
+\end{enumerate}
+
+\end{document}

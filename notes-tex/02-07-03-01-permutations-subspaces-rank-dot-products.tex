@@ -1,0 +1,158 @@
+\documentclass[10pt]{article}
+\input{../templates/exam-note-template.tex}
+
+\begin{document}
+
+\begin{center}
+{\LARGE Permutations, Subspaces, Rank, and Dot Products\par}
+\end{center}
+\notesubtitle{Concise revision notes from the 30 Dec handwritten matrix-operations review.}
+\source{Based on handwritten MIT 18.06 revision notes.}
+
+\section{Core Idea}
+
+\labelnote{Core idea}{Early linear algebra questions often reduce to three checks: what operations preserve structure, whether a set is a subspace, and how rank controls solution behavior.}
+
+This note collects matrix-operation facts used repeatedly later: permutation matrices, subspaces, rank cases, row/column relationships, dot products, and skew-symmetry.
+
+\section{Permutation Matrices}
+
+A permutation matrix reorders rows or columns. It is orthogonal:
+\[
+P^{T}P=I,
+\qquad
+P^{-1}=P^{T}.
+\]
+Multiplying on the left reorders rows:
+\[
+PA.
+\]
+Multiplying on the right reorders columns:
+\[
+AP.
+\]
+
+\labelnote{Exam memory}{A permutation matrix looks like the identity matrix with its rows or columns rearranged.}
+
+\section{Subspace Test}
+
+A set \(S\) is a subspace when:
+\begin{enumerate}
+  \item \(0\in S\);
+  \item if \(u,v\in S\), then \(u+v\in S\);
+  \item if \(u\in S\), then \(cu\in S\).
+\end{enumerate}
+
+The nullspace is a subspace because if
+\[
+Au=0,
+\qquad
+Av=0,
+\]
+then
+\[
+A(u+v)=0,
+\qquad
+A(cu)=0.
+\]
+
+\labelnote{Common mistake}{A set defined by \(Ax=b\) with \(b\ne0\) is usually not a subspace, because it does not contain the zero vector.}
+
+\section{Rank Cases}
+
+For \(A\in\mathbb{R}^{m\times n}\), rank \(r\) controls solution behavior.
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.20\linewidth}Y Y@{}}
+\toprule
+Rank case & Meaning & Exam consequence \\
+\midrule
+\(r=n\) & Full column rank. & At most one solution to \(Ax=b\). \\
+\(r=m\) & Full row rank. & \(Ax=b\) is solvable for every \(b\in\mathbb{R}^m\). \\
+\(r=m=n\) & Full rank square. & Exactly one solution for every \(b\). \\
+\(r<m\) and \(r<n\) & Not full rank. & Zero or infinitely many solutions. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Row Space and Column Space}
+
+Row space and column space have the same dimension:
+\[
+\dim C(A)=\dim C(A^{T})=\operatorname{rank}(A).
+\]
+But they usually live in different ambient spaces:
+\[
+C(A)\subseteq\mathbb{R}^{m},
+\qquad
+C(A^{T})\subseteq\mathbb{R}^{n}.
+\]
+
+\labelnote{Exam memory}{Same dimension does not mean the same space. Check where the vectors live.}
+
+\section{Dot Product}
+
+The dot product is
+\[
+x\cdot y=x^{T}y.
+\]
+It measures alignment:
+\[
+x^{T}y=0
+\]
+means the vectors are perpendicular.
+
+It also interacts cleanly with matrix multiplication:
+\[
+(Px)\cdot(Py)=x\cdot y
+\]
+for a permutation or orthogonal matrix \(P\).
+
+\section{Skew-Symmetric Matrices}
+
+A matrix is skew-symmetric when
+\[
+A^{T}=-A.
+\]
+The diagonal entries must be zero, because
+\[
+a_{ii}=-a_{ii}
+\quad\Rightarrow\quad
+a_{ii}=0.
+\]
+Off-diagonal entries come in opposite pairs.
+
+\section{Common Mistakes}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.40\linewidth}Y@{}}
+\toprule
+Mistake & Correct exam habit \\
+\midrule
+Treating \(Ax=b\) as a subspace when \(b\ne0\). & Check whether the zero vector is included. \\
+Confusing row operations with column operations. & Left multiply changes rows; right multiply changes columns. \\
+Assuming equal dimensions imply equal spaces. & Check the ambient spaces. \\
+Forgetting the full-rank square case. & \(r=m=n\) gives existence and uniqueness. \\
+Putting nonzero entries on a skew-symmetric diagonal. & The diagonal must be zero. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Final Exam Checklist}
+
+\tightlabel{Checklist}
+\begin{enumerate}
+  \item Identify whether multiplication is on the left or right.
+  \item Check \(P^{T}P=I\) for permutation matrices.
+  \item Test subspaces by zero vector, addition, and scalar multiplication.
+  \item Write the size \(m\times n\) before using rank facts.
+  \item Find rank \(r\).
+  \item Use full column rank for uniqueness.
+  \item Use full row rank for existence.
+  \item Use \(x^{T}y=0\) to check perpendicularity.
+  \item Check skew-symmetry with \(A^{T}=-A\).
+\end{enumerate}
+
+\end{document}

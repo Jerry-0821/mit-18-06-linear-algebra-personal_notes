@@ -1,0 +1,103 @@
+\documentclass[10pt]{article}
+\input{../templates/exam-note-template.tex}
+
+\begin{document}
+
+\begin{center}
+{\LARGE Eigenvalue Patterns for Common Matrix Types\par}
+\end{center}
+\notesubtitle{Concise exam revision table for recognizing eigenvalue behavior quickly.}
+\source{Based on handwritten MIT 18.06 revision notes.}
+
+\section{Core Idea}
+
+\labelnote{Core idea}{Special matrix structure often predicts eigenvalue behavior before calculation. Use structure first, then verify by computation.}
+
+This note is an original compact reference based on standard 18.06 facts.
+
+\section{Common Patterns}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.28\linewidth}Y Y@{}}
+\toprule
+Matrix type & Eigenvalue pattern & Exam use \\
+\midrule
+Symmetric \(S=S^{T}\) & Real eigenvalues. & Orthogonal eigenvectors; use \(S=Q\Lambda Q^{T}\). \\
+Orthogonal \(Q^{T}Q=I\) & \(|\lambda|=1\). & Lengths are preserved. \\
+Skew-symmetric \(A^{T}=-A\) & Pure imaginary or zero eigenvalues. & Diagonal entries are zero. \\
+Projection \(P^{2}=P\) & \(\lambda=0\) or \(1\). & Range stays, nullspace collapses. \\
+Positive definite \(S\) & All \(\lambda>0\). & Use for quadratic forms and pivots. \\
+Rank-one \(uv^{T}\) & At most one nonzero eigenvalue. & Most directions collapse. \\
+Triangular & Diagonal entries. & Read eigenvalues directly. \\
+Similar matrices & Same eigenvalues. & Change coordinates without changing spectrum. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Shift, Inverse, and Powers}
+
+If \(Ax=\lambda x\), then:
+\[
+(A+cI)x=(\lambda+c)x.
+\]
+So shifting by \(cI\) shifts eigenvalues by \(c\).
+
+If \(A\) is invertible, then:
+\[
+A^{-1}x=\frac{1}{\lambda}x.
+\]
+So inverse eigenvalues are reciprocals.
+
+For powers:
+\[
+A^{k}x=\lambda^{k}x.
+\]
+This is why eigenvalues control long-term behavior.
+
+\section{Stability Memory}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.32\linewidth}Y@{}}
+\toprule
+Problem type & Stability test \\
+\midrule
+Repeated powers \(A^k\) & Use \(|\lambda|\). \\
+Differential equation \(u'=Au\) & Use \(\operatorname{Re}\lambda\). \\
+Projection & Stable because eigenvalues are \(0,1\). \\
+Orthogonal iteration & Lengths do not grow because \(|\lambda|=1\). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Common Mistakes}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.40\linewidth}Y@{}}
+\toprule
+Mistake & Correct exam habit \\
+\midrule
+Using \(S=Q\Lambda Q^{T}\) without symmetry. & First check \(S=S^{T}\). \\
+Assuming all real matrices have real eigenvalues. & Rotations can give complex eigenvalues. \\
+Forgetting zero eigenvalues in projections. & Projection kills directions in the nullspace. \\
+Using \(|\lambda|\) for \(u'=Au\). & Use \(\operatorname{Re}\lambda\) for continuous systems. \\
+Assuming same eigenvalues means same eigenvectors. & Similar matrices preserve eigenvalues, not necessarily vector coordinates. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Final Exam Checklist}
+
+\tightlabel{Checklist}
+\begin{enumerate}
+  \item Identify special structure before calculating.
+  \item Check symmetry, orthogonality, projection, or triangular form.
+  \item Use the structure to predict eigenvalue behavior.
+  \item Verify with trace, determinant, or \(\det(A-\lambda I)\).
+  \item Use shifts, inverses, and powers to transform known eigenvalues.
+  \item Use \(|\lambda|\) for powers and \(\operatorname{Re}\lambda\) for differential equations.
+\end{enumerate}
+
+\end{document}

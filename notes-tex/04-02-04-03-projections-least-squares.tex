@@ -1,0 +1,212 @@
+\documentclass[10pt]{article}
+\input{../templates/exam-note-template.tex}
+
+\begin{document}
+
+\begin{center}
+{\LARGE 4.2--4.3 Projections and Least Squares\par}
+\end{center}
+\notesubtitle{Concise exam revision notes for projections, projection matrices, and least squares.}
+\source{Based on handwritten MIT 18.06 revision notes.}
+
+\section{Core Idea}
+
+\labelnote{Core idea}{When \(Ax=b\) has no solution, replace \(b\) by the closest vector \(p\) in the column space of \(A\). The error \(e=b-p\) must be perpendicular to that column space.}
+
+The picture is always
+\[
+b=p+e,
+\qquad
+p\in C(A),
+\qquad
+e\in N(A^{T}).
+\]
+Projection turns an unsolvable equation into a solvable normal equation.
+
+\section{Projection Onto a Line}
+
+For a nonzero vector \(a\), the projection of \(b\) onto the line through \(a\) has the form
+\[
+p=\hat{x}a.
+\]
+The error is perpendicular to \(a\):
+\[
+a^{T}(b-\hat{x}a)=0.
+\]
+Solving gives
+\[
+\hat{x}=\frac{a^{T}b}{a^{T}a},
+\qquad
+p=a\frac{a^{T}b}{a^{T}a}.
+\]
+So the one-dimensional projection matrix is
+\[
+P=\frac{aa^{T}}{a^{T}a}.
+\]
+
+\labelnote{Meaning}{\(\hat{x}\) is the coordinate along the line; \(p\) is the closest point on the line.}
+
+\section{Projection Onto a Subspace}
+
+Let the columns of \(A\) span the subspace. We look for
+\[
+p=A\hat{x}.
+\]
+The error \(e=b-A\hat{x}\) must be perpendicular to every column of \(A\):
+\[
+A^{T}e=0.
+\]
+Therefore
+\[
+A^{T}(b-A\hat{x})=0,
+\qquad
+A^{T}A\hat{x}=A^{T}b.
+\]
+These are the normal equations.
+
+If the columns of \(A\) are independent, then \(A^{T}A\) is invertible and
+\[
+\hat{x}=(A^{T}A)^{-1}A^{T}b.
+\]
+The projection is
+\[
+p=A\hat{x}=A(A^{T}A)^{-1}A^{T}b.
+\]
+So the projection matrix is
+\[
+P=A(A^{T}A)^{-1}A^{T}.
+\]
+
+\section{Projection Matrix Facts}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.25\linewidth}Y Y@{}}
+\toprule
+Fact & Formula & Meaning \\
+\midrule
+Projection lands in \(C(A)\) & \(p=Pb\) & \(p\) is the closest vector in the column space. \\
+Error is perpendicular & \(A^{T}(b-p)=0\) & \(e=b-p\) lies in \(N(A^{T})\). \\
+Projecting twice changes nothing & \(P^{2}=P\) & Once on the subspace, it stays there. \\
+Orthogonal projection is symmetric & \(P^{T}=P\) & True for projection onto a column space. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\labelnote{Exam trigger}{If the problem asks for closest vector, best fit, or least squares, expect \(A^{T}A\hat{x}=A^{T}b\).}
+
+\section{Orthogonal Columns Shortcut}
+
+If the columns \(q_1,\ldots,q_n\) are orthonormal, put them in \(Q\). Then
+\[
+Q^{T}Q=I.
+\]
+Projection becomes much simpler:
+\[
+p=QQ^{T}b.
+\]
+Equivalently,
+\[
+p=(q_1^{T}b)q_1+\cdots+(q_n^{T}b)q_n.
+\]
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.28\linewidth}Y@{}}
+\toprule
+Columns of \(A\) & Projection formula \\
+\midrule
+Independent & \(P=A(A^{T}A)^{-1}A^{T}\). \\
+Orthogonal but not unit & Add projections along each column separately. \\
+Orthonormal & \(P=QQ^{T}\). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\labelnote{Common mistake}{Do not use \(QQ^{T}\) unless the columns are orthonormal. Orthogonal columns still need length factors.}
+
+\section{Least Squares}
+
+Least squares solves the closest version of an inconsistent system:
+\[
+Ax\approx b.
+\]
+The best coefficient vector is \(\hat{x}\), found from
+\[
+A^{T}A\hat{x}=A^{T}b.
+\]
+Then
+\[
+p=A\hat{x},
+\qquad
+e=b-p.
+\]
+
+For a best-fit line
+\[
+y=C+Dt,
+\]
+the matrix has rows
+\[
+\begin{bmatrix}1&t_i\end{bmatrix}.
+\]
+The unknown vector is
+\[
+\hat{x}=
+\begin{bmatrix}
+C\\
+D
+\end{bmatrix}.
+\]
+The same normal equation gives the least-squares line.
+
+\section{\(P\) and \(I-P\)}
+
+The projection splits \(b\) into two perpendicular parts:
+\[
+b=Pb+(I-P)b.
+\]
+Here
+\[
+Pb\in C(A),
+\qquad
+(I-P)b\in N(A^{T}).
+\]
+If \(P\) projects onto \(C(A)\), then \(I-P\) projects onto the left nullspace.
+
+\labelnote{Exam memory}{Projection onto a subspace plus projection onto its orthogonal complement gives the original vector.}
+
+\section{Common Mistakes}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.40\linewidth}Y@{}}
+\toprule
+Mistake & Correct exam habit \\
+\midrule
+Solving \(Ax=b\) when it is inconsistent. & Solve \(A^{T}A\hat{x}=A^{T}b\). \\
+Forgetting the error condition. & Check \(A^{T}e=0\). \\
+Using \(P=A^{-1}\) language. & Projection is not inversion. Use \(P=A(A^{T}A)^{-1}A^{T}\). \\
+Using \(QQ^{T}\) for non-orthonormal columns. & First check \(Q^{T}Q=I\). \\
+Assuming \(P_1+P_2=I\) for any two projections. & This works for orthogonal complementary subspaces. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Final Exam Checklist}
+
+\tightlabel{Checklist}
+\begin{enumerate}
+  \item Identify the subspace: usually \(C(A)\) or a line through \(a\).
+  \item Write \(p=A\hat{x}\) or \(p=\hat{x}a\).
+  \item Write the error \(e=b-p\).
+  \item Impose perpendicularity: \(A^{T}e=0\) or \(a^{T}e=0\).
+  \item Solve \(A^{T}A\hat{x}=A^{T}b\).
+  \item Compute \(p=A\hat{x}\).
+  \item Compute the error \(e=b-p\).
+  \item Use \(P=A(A^{T}A)^{-1}A^{T}\) only when the columns of \(A\) are independent.
+  \item Use \(P=QQ^{T}\) only when the columns are orthonormal.
+  \item State where \(p\) and \(e\) live: \(p\in C(A)\), \(e\in N(A^{T})\).
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,302 @@
+\documentclass[10pt]{article}
+\input{../templates/exam-note-template.tex}
+
+\begin{document}
+
+\begin{center}
+{\LARGE 3.2--3.3 Nullspace, Special Solutions, and Complete Solutions\par}
+\end{center}
+\notesubtitle{Concise exam revision notes for homogeneous and nonhomogeneous systems.}
+\source{Based on handwritten MIT 18.06 revision notes.}
+
+\section{Core Idea}
+
+\labelnote{Core idea}{Row reduction separates a linear system into forced variables and free variables. Pivot variables are forced by the equations; free variables create the directions in the nullspace.}
+
+The two central systems are:
+\[
+Ax=0
+\]
+and
+\[
+Ax=b.
+\]
+The first finds input directions that disappear under \(A\). The second asks whether the right side \(b\) can be built from the columns of \(A\).
+
+\section{Big Picture}
+
+Let \(A\) be an \(m\times n\) matrix.
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.21\linewidth}Y Y@{}}
+\toprule
+Question & Meaning & Output \\
+\midrule
+\(Ax=0\) & Which input vectors are sent to zero? & The nullspace \(N(A)\). \\
+\(Ax=b\) & Can the columns of \(A\) produce this \(b\)? & Zero, one, or infinitely many solutions. \\
+Row reduction & Reveals pivots and free variables. & The structure of all solutions. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The rank \(r\) is the number of pivots. The number of free variables is
+\[
+n-r.
+\]
+
+\labelnote{Exam trigger}{If a problem says ``find all solutions'', expect an answer of the form}
+\[
+x=x_p+x_n.
+\]
+Here \(x_p\) is one particular solution and \(x_n\) runs through the nullspace.
+
+\section{Nullspace vs Column Space}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.19\linewidth}Y L{0.18\linewidth}Y@{}}
+\toprule
+Space & Definition & Lives in & What it tells you \\
+\midrule
+Nullspace \(N(A)\) & All \(x\) such that \(Ax=0\). & \(\mathbb{R}^n\) & Directions that do not change \(Ax\). \\
+Column space \(C(A)\) & All linear combinations of the columns of \(A\). & \(\mathbb{R}^m\) & Right sides \(b\) for which \(Ax=b\) is solvable. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Why the dimensions differ:
+\begin{itemize}
+  \item \(x\) has one entry per column of \(A\), so \(x\in\mathbb{R}^n\).
+  \item \(Ax\) and \(b\) have one entry per row of \(A\), so they live in \(\mathbb{R}^m\).
+  \item Therefore \(N(A)\subseteq\mathbb{R}^n\), while \(C(A)\subseteq\mathbb{R}^m\).
+\end{itemize}
+
+\labelnote{Common mistake}{Do not place the nullspace in \(\mathbb{R}^m\). The nullspace contains input vectors, so its vectors have length \(n\).}
+
+\section{Free Variables and Special Solutions}
+
+Free variables appear in columns without pivots. Each free variable gives one independent nullspace direction.
+
+\subsection{Solving pattern}
+
+\begin{enumerate}
+  \item Row-reduce \(A\) to echelon or reduced echelon form.
+  \item Mark pivot variables and free variables.
+  \item Set one free variable to \(1\) and all other free variables to \(0\).
+  \item Solve for the pivot variables.
+  \item The resulting vector is one special solution.
+  \item Repeat once for each free variable.
+\end{enumerate}
+
+If the free variables are \(x_3\) and \(x_4\), use
+\[
+(x_3,x_4)=(1,0)
+\qquad\text{and}\qquad
+(x_3,x_4)=(0,1).
+\]
+These choices produce two special solutions \(s_1\) and \(s_2\).
+
+\labelnote{Core idea}{The special solutions form a basis for the nullspace:}
+\[
+N(A)=\operatorname{span}\{s_1,\ldots,s_{n-r}\}.
+\]
+
+\labelnote{Exam trigger}{If \(n>m\), then \(r\le m<n\). There must be at least one free variable, so \(Ax=0\) has a nonzero solution.}
+
+\section{Complete Solution}
+
+For \(Ax=b\), first check consistency. If the system is consistent, all solutions are
+\[
+x=x_p+x_n.
+\]
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.23\linewidth}L{0.20\linewidth}Y Y@{}}
+\toprule
+Part & Equation & Role & How to find it \\
+\midrule
+Particular solution \(x_p\) & \(Ax_p=b\) & One fixed solution. & Often set free variables to \(0\). \\
+Nullspace part \(x_n\) & \(Ax_n=0\) & Directions added to \(x_p\). & Combine special solutions. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+If \(s_1,\ldots,s_k\) are special solutions, then
+\[
+x=x_p+c_1s_1+c_2s_2+\cdots+c_ks_k.
+\]
+The constants \(c_1,\ldots,c_k\) are arbitrary.
+
+Why this works:
+\[
+A(x_p+x_n)=Ax_p+Ax_n=b+0=b.
+\]
+Adding a nullspace vector keeps the same right side.
+
+\labelnote{Common mistake}{Do not multiply the particular solution by an arbitrary constant. The free constants belong only to nullspace directions.}
+
+\section{Rank, Pivots, and Free Variables}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.27\linewidth}Y Y@{}}
+\toprule
+Quantity & Meaning & Exam use \\
+\midrule
+\(r=\operatorname{rank}(A)\) & Number of pivots. & Counts independent columns. \\
+Pivot variables & Variables solved from equations. & Forced by the system. \\
+Free variables & Variables chosen freely. & Create special solutions. \\
+\(n-r\) & Number of free variables. & Dimension of \(N(A)\). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The rank-nullity count used here is
+\[
+\dim N(A)=n-r.
+\]
+\labelnote{Exam memory}{Full column rank controls uniqueness. Full row rank controls existence. Square full rank gives both.}
+
+For \(Ax=0\), row operations do not change the solution set, so it is enough to solve
+\[
+Rx=0.
+\]
+For \(Ax=b\), reduce the augmented matrix \([A\ b]\). A zero coefficient row with a nonzero augmented entry means no solution.
+
+\section{Full Column Rank vs Full Row Rank}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.24\linewidth}L{0.18\linewidth}Y Y@{}}
+\toprule
+Case & Condition & Nullspace & Behavior of \(Ax=b\) \\
+\midrule
+Square full rank & \(r=m=n\) & Only \(0\). & Exactly one solution for every \(b\). \\
+Full column rank & \(r=n\le m\) & Only \(0\). & Zero or one solution. \\
+Full row rank & \(r=m\le n\) & Dimension \(n-m\). & At least one solution for every \(b\). \\
+Not full rank & \(r<m\) and \(r<n\) & Dimension \(n-r\). & Zero or infinitely many solutions. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Full column rank}
+
+Every column has a pivot.
+\begin{itemize}
+  \item No free variables.
+  \item \(N(A)=\{0\}\).
+  \item If a solution exists, it is unique.
+  \item Some right sides \(b\) may still be outside the column space.
+\end{itemize}
+
+\subsection{Full row rank}
+
+Every row has a pivot.
+\begin{itemize}
+  \item The column space is all of \(\mathbb{R}^m\).
+  \item \(Ax=b\) is solvable for every \(b\in\mathbb{R}^m\).
+  \item If \(n>m\), free variables make the solution infinite.
+\end{itemize}
+
+\labelnote{Common mistake}{Full column rank gives uniqueness, not automatic existence. Full row rank gives existence for every \(b\), not uniqueness.}
+
+\section{Rank-One Matrix Example}
+
+A rank-one matrix has the form
+\[
+A=uv^{T}.
+\]
+Then
+\[
+Ax=u(v^{T}x).
+\]
+If \(u\ne0\), then \(Ax=0\) is equivalent to
+\[
+v^{T}x=0.
+\]
+So the nullspace consists of vectors perpendicular to \(v\).
+
+Example:
+\[
+A =
+\begin{bmatrix}
+1 & 3 & 10\\
+2 & 6 & 20\\
+3 & 9 & 30
+\end{bmatrix}
+=
+\begin{bmatrix}
+1\\
+2\\
+3
+\end{bmatrix}
+\begin{bmatrix}
+1 & 3 & 10
+\end{bmatrix}.
+\]
+
+The nullspace condition is
+\[
+x_1+3x_2+10x_3=0.
+\]
+
+\begin{center}
+\small
+\begin{tabularx}{0.72\linewidth}{@{}YY@{}}
+\toprule
+Free choice & Resulting special solution \\
+\midrule
+\(x_2=1,\ x_3=0\) & \((-3,1,0)\) \\
+\(x_2=0,\ x_3=1\) & \((-10,0,1)\) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Therefore
+\[
+N(A)=\operatorname{span}\{(-3,1,0),(-10,0,1)\}.
+\]
+
+\labelnote{Common mistake}{For \(A=uv^{T}\), the nullspace condition is \(v^{T}x=0\), not \(u^{T}x=0\). The vector \(v\) matches the input dimension.}
+
+\section{Common Mistakes}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.38\linewidth}Y@{}}
+\toprule
+Mistake & Correct exam habit \\
+\midrule
+Putting \(N(A)\) in \(\mathbb{R}^m\). & \(N(A)\subseteq\mathbb{R}^n\), because \(x\) has \(n\) entries. \\
+Counting rows to find special solutions. & Count free variables: \(n-r\). \\
+Giving only \(x_p\) for \(Ax=b\). & Add the whole nullspace: \(x=x_p+x_n\). \\
+Scaling \(x_p\) by a free constant. & Only special solutions get arbitrary constants. \\
+Treating full column rank as automatic solvability. & It gives uniqueness if a solution exists. \\
+Treating full row rank as uniqueness. & It gives existence for every \(b\); free variables may remain. \\
+Ignoring inconsistent rows. & Check \([A\ b]\) before writing a solution. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Final Exam Checklist}
+
+\tightlabel{Checklist}
+\begin{enumerate}
+  \item Write the size: \(A\) is \(m\times n\).
+  \item Row-reduce and find the rank \(r\).
+  \item Mark pivot variables and free variables.
+  \item For \(Ax=0\), create one special solution per free variable.
+  \item Check that the number of special solutions is \(n-r\).
+  \item For \(Ax=b\), reduce \([A\ b]\) and check consistency.
+  \item Find one particular solution \(x_p\).
+  \item Add the nullspace:
+  \[
+  x=x_p+c_1s_1+\cdots+c_ks_k.
+  \]
+  \item Check dimensions: \(x\in\mathbb{R}^n\), \(b\in\mathbb{R}^m\).
+  \item State the outcome directly: no solution, one solution, or infinitely many.
+\end{enumerate}
+
+\end{document}

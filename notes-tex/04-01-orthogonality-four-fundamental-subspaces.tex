@@ -1,0 +1,183 @@
+\documentclass[10pt]{article}
+\input{../templates/exam-note-template.tex}
+
+\begin{document}
+
+\begin{center}
+{\LARGE 4.1 Orthogonality and the Four Fundamental Subspaces\par}
+\end{center}
+\notesubtitle{Concise exam revision notes for orthogonal complements in \(\mathbb{R}^n\) and \(\mathbb{R}^m\).}
+\source{Based on handwritten MIT 18.06 revision notes.}
+
+\section{Core Idea}
+
+\labelnote{Core idea}{Orthogonality connects the four fundamental subspaces in pairs. Row space is perpendicular to nullspace; column space is perpendicular to left nullspace.}
+
+The dot product test is
+\[
+v^{T}w=0.
+\]
+If this holds for every vector \(v\) in one subspace and every vector \(w\) in another, the two subspaces are orthogonal.
+
+\section{Orthogonal Subspaces vs Orthogonal Complements}
+
+Orthogonal subspaces may intersect only at zero, but that alone does not mean they fill the whole space.
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.30\linewidth}Y Y@{}}
+\toprule
+Idea & Meaning & Exam check \\
+\midrule
+Orthogonal subspaces & Every vector in one is perpendicular to every vector in the other. & Dot products are zero. \\
+Orthogonal complements & Orthogonal subspaces whose dimensions add to the ambient dimension. & Dot products zero and dimensions add correctly. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\labelnote{Common mistake}{Do not say ``orthogonal complement'' from perpendicularity alone. Also check the dimension count.}
+
+\section{Row Space and Nullspace}
+
+Let \(A\in\mathbb{R}^{m\times n}\). Each row of \(A\) is a vector in \(\mathbb{R}^n\). If \(x\in N(A)\), then
+\[
+Ax=0.
+\]
+This means every row of \(A\) has dot product zero with \(x\). Therefore
+\[
+C(A^{T})\perp N(A).
+\]
+
+Their dimensions add to the whole ambient space \(\mathbb{R}^n\):
+\[
+\dim C(A^{T})+\dim N(A)=r+(n-r)=n.
+\]
+So they are orthogonal complements:
+\[
+N(A)=C(A^{T})^{\perp},
+\qquad
+C(A^{T})=N(A)^{\perp}.
+\]
+
+\section{Column Space and Left Nullspace}
+
+The left nullspace is
+\[
+N(A^{T})=\{y:A^{T}y=0\}.
+\]
+If \(y\in N(A^{T})\), then \(y\) is perpendicular to every column of \(A\). Therefore
+\[
+C(A)\perp N(A^{T}).
+\]
+
+Their dimensions add to the whole ambient space \(\mathbb{R}^m\):
+\[
+\dim C(A)+\dim N(A^{T})=r+(m-r)=m.
+\]
+So they are orthogonal complements:
+\[
+N(A^{T})=C(A)^{\perp},
+\qquad
+C(A)=N(A^{T})^{\perp}.
+\]
+
+\section{Four-Subspace Summary}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.25\linewidth}L{0.16\linewidth}L{0.18\linewidth}Y@{}}
+\toprule
+Subspace & Lives in & Dimension & Orthogonal complement \\
+\midrule
+Row space \(C(A^{T})\) & \(\mathbb{R}^n\) & \(r\) & Nullspace \(N(A)\). \\
+Nullspace \(N(A)\) & \(\mathbb{R}^n\) & \(n-r\) & Row space \(C(A^{T})\). \\
+Column space \(C(A)\) & \(\mathbb{R}^m\) & \(r\) & Left nullspace \(N(A^{T})\). \\
+Left nullspace \(N(A^{T})\) & \(\mathbb{R}^m\) & \(m-r\) & Column space \(C(A)\). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\labelnote{Exam memory}{The complement must live in the same ambient space: row with null in \(\mathbb{R}^n\), column with left null in \(\mathbb{R}^m\).}
+
+\section{Small Example}
+
+Let
+\[
+A=
+\begin{bmatrix}
+1&2&0\\
+0&0&1
+\end{bmatrix}.
+\]
+The row space is
+\[
+C(A^{T})=\operatorname{span}\{(1,2,0),(0,0,1)\}.
+\]
+The nullspace is found from
+\[
+x_1+2x_2=0,
+\qquad
+x_3=0,
+\]
+so
+\[
+N(A)=\operatorname{span}\{(-2,1,0)\}.
+\]
+The dot products are zero:
+\[
+(1,2,0)\cdot(-2,1,0)=0,
+\qquad
+(0,0,1)\cdot(-2,1,0)=0.
+\]
+This shows the row space direction and nullspace direction are perpendicular in \(\mathbb{R}^3\).
+
+\section{How to Use This in Problems}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.32\linewidth}Y@{}}
+\toprule
+If you know a vector is perpendicular to & Then place it in \\
+\midrule
+Every row of \(A\) & \(N(A)\). \\
+Every vector in \(N(A)\) & \(C(A^{T})\). \\
+Every column of \(A\) & \(N(A^{T})\). \\
+Every vector in \(N(A^{T})\) & \(C(A)\). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\labelnote{Dimension check}{Perpendicularity plus the correct dimension identifies the whole orthogonal complement.}
+
+\section{Common Mistakes}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.40\linewidth}Y@{}}
+\toprule
+Mistake & Correct exam habit \\
+\midrule
+Putting row space in \(\mathbb{R}^m\). & Row vectors have length \(n\), so row space lives in \(\mathbb{R}^n\). \\
+Pairing column space with \(N(A)\). & Column space pairs with \(N(A^{T})\). \\
+Forgetting the left nullspace. & Solve \(A^{T}y=0\), not \(Ax=0\). \\
+Calling any perpendicular subspaces complements. & Check that the dimensions add to \(n\) or \(m\). \\
+Copying the picture instead of using the dimension count. & Use the table and formulas to reconstruct the relationship. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Final Exam Checklist}
+
+\tightlabel{Checklist}
+\begin{enumerate}
+  \item Write the size: \(A\) is \(m\times n\).
+  \item Identify the ambient space: \(\mathbb{R}^n\) or \(\mathbb{R}^m\).
+  \item Pair \(C(A^{T})\) with \(N(A)\) inside \(\mathbb{R}^n\).
+  \item Pair \(C(A)\) with \(N(A^{T})\) inside \(\mathbb{R}^m\).
+  \item Use \(Ax=0\) for the nullspace.
+  \item Use \(A^{T}y=0\) for the left nullspace.
+  \item Check dimension sums: \(r+(n-r)=n\) and \(r+(m-r)=m\).
+  \item State the orthogonal complement relationship directly.
+\end{enumerate}
+
+\end{document}

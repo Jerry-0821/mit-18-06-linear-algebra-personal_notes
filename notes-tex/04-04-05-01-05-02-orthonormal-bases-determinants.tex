@@ -1,0 +1,203 @@
+\documentclass[10pt]{article}
+\input{../templates/exam-note-template.tex}
+
+\begin{document}
+
+\begin{center}
+{\LARGE 4.4, 5.1--5.2 Orthonormal Bases, QR, and Determinants\par}
+\end{center}
+\notesubtitle{Concise exam revision notes for orthonormal columns, QR factorization, and determinant rules.}
+\source{Based on handwritten MIT 18.06 revision notes.}
+
+\section{Core Idea}
+
+\labelnote{Core idea}{Orthonormal columns make projection and least squares simple. Determinants measure whether a square matrix is singular and how elimination changes volume.}
+
+This note has two connected parts:
+\[
+Q^{T}Q=I
+\qquad\text{and}\qquad
+\det A.
+\]
+The first simplifies geometry; the second summarizes invertibility for square matrices.
+
+\section{Orthogonal vs Orthonormal}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.25\linewidth}Y Y@{}}
+\toprule
+Word & Condition & Meaning \\
+\midrule
+Orthogonal & \(q_i^{T}q_j=0\) for \(i\ne j\). & Different directions are perpendicular. \\
+Orthonormal & \(q_i^{T}q_j=0\) and \(q_i^{T}q_i=1\). & Perpendicular and unit length. \\
+Matrix \(Q\) with orthonormal columns & \(Q^{T}Q=I\). & Dot products are already built in. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+If \(Q\) is square and orthonormal, then
+\[
+Q^{-1}=Q^{T}.
+\]
+For rectangular \(Q\), \(Q^{T}Q=I\), but \(QQ^{T}\) is a projection matrix.
+
+\section{Gram--Schmidt}
+
+Gram--Schmidt turns independent vectors into orthogonal vectors, then normalizes them.
+
+For two vectors \(a,b\), first keep
+\[
+A=a.
+\]
+Remove from \(b\) the part in the \(a\)-direction:
+\[
+B=b-\frac{a^{T}b}{a^{T}a}a.
+\]
+Then normalize:
+\[
+q_1=\frac{A}{\|A\|},
+\qquad
+q_2=\frac{B}{\|B\|}.
+\]
+For a third vector \(c\), subtract the projections onto the previous orthogonal directions:
+\[
+C=c-\frac{A^{T}c}{A^{T}A}A-\frac{B^{T}c}{B^{T}B}B.
+\]
+
+\labelnote{Exam trigger}{If the problem says ``make an orthonormal basis'', use Gram--Schmidt, then divide by lengths.}
+
+\section{QR Factorization}
+
+For independent columns,
+\[
+A=QR,
+\]
+where \(Q\) has orthonormal columns and \(R\) is upper triangular.
+
+The entries of \(R\) record dot products with the \(q\)'s:
+\[
+R=Q^{T}A.
+\]
+For least squares,
+\[
+A^{T}A\hat{x}=A^{T}b
+\]
+becomes
+\[
+R\hat{x}=Q^{T}b.
+\]
+This is easier because \(R\) is triangular.
+
+\section{Projection with Orthonormal Columns}
+
+If \(Q\) has orthonormal columns, projection onto \(C(Q)\) is
+\[
+p=QQ^{T}b.
+\]
+In vector form,
+\[
+p=(q_1^{T}b)q_1+(q_2^{T}b)q_2+\cdots+(q_n^{T}b)q_n.
+\]
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.28\linewidth}Y@{}}
+\toprule
+Column type & Projection habit \\
+\midrule
+Orthonormal \(q_i\) & Use \(q_i^{T}b\) directly. \\
+Orthogonal but not unit & Divide by \(a_i^{T}a_i\). \\
+General independent columns & Use \(A(A^{T}A)^{-1}A^{T}\). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Orthogonal Matrices}
+
+For square orthogonal \(Q\),
+\[
+Q^{T}Q=I,
+\qquad
+Q^{-1}=Q^{T}.
+\]
+Orthogonal matrices preserve lengths and dot products:
+\[
+\|Qx\|=\|x\|,
+\qquad
+(Qx)^{T}(Qy)=x^{T}y.
+\]
+Rotations and reflections are the main exam examples.
+
+\section{Determinant Rules}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.34\linewidth}Y@{}}
+\toprule
+Operation or fact & Effect on determinant \\
+\midrule
+Exchange two rows & Changes the sign. \\
+Multiply one row by \(c\) & Multiplies determinant by \(c\). \\
+Add a multiple of one row to another & No change. \\
+Triangular matrix & Product of diagonal entries. \\
+Singular matrix & Determinant is \(0\). \\
+Product & \(\det(AB)=\det A\det B\). \\
+Transpose & \(\det(A^{T})=\det A\). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\labelnote{Exam memory}{A zero determinant means no inverse. A nonzero determinant means the square matrix is invertible.}
+
+\section{Pivots and Cofactors}
+
+If elimination uses no row exchanges, then
+\[
+\det A=(\text{product of pivots}).
+\]
+For leading submatrices \(A_k\), pivots can be checked by determinant ratios:
+\[
+d_k=\frac{\det A_k}{\det A_{k-1}}.
+\]
+
+Cofactor expansion is useful when a row or column has many zeros:
+\[
+\det A=\sum_j (-1)^{i+j}a_{ij}\det M_{ij}.
+\]
+Use it selectively; elimination is usually faster for larger matrices.
+
+\section{Common Mistakes}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.40\linewidth}Y@{}}
+\toprule
+Mistake & Correct exam habit \\
+\midrule
+Calling orthogonal columns orthonormal. & Check both perpendicularity and unit length. \\
+Using \(Q^{-1}=Q^{T}\) for rectangular \(Q\). & Only square orthogonal matrices have inverse \(Q^{T}\). \\
+Forgetting to normalize after Gram--Schmidt. & Orthogonal first, unit length second. \\
+Using \(QQ^{T}\) for any basis. & Use it only for orthonormal columns. \\
+Changing a row and forgetting the determinant effect. & Track swaps, scaling, and row replacement separately. \\
+Expanding cofactors when elimination is simpler. & Use zeros or structure to choose the method. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Final Exam Checklist}
+
+\tightlabel{Checklist}
+\begin{enumerate}
+  \item Check whether vectors are orthogonal by dot products.
+  \item Check whether vectors are orthonormal by dot products and lengths.
+  \item Use Gram--Schmidt to build orthogonal vectors.
+  \item Normalize each vector to get \(q_i\).
+  \item Form \(Q\) from the \(q_i\)'s and compute \(R=Q^{T}A\).
+  \item For least squares with \(A=QR\), solve \(R\hat{x}=Q^{T}b\).
+  \item For determinants, choose elimination unless cofactor expansion has many zeros.
+  \item Track determinant changes from row operations.
+  \item Use \(\det A=0\) to identify singular square matrices.
+\end{enumerate}
+
+\end{document}

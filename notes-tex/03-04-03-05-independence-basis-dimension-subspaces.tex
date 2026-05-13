@@ -1,0 +1,231 @@
+\documentclass[10pt]{article}
+\input{../templates/exam-note-template.tex}
+
+\begin{document}
+
+\begin{center}
+{\LARGE 3.4--3.5 Independence, Basis, Dimension, and Subspaces\par}
+\end{center}
+\notesubtitle{Concise exam revision notes for independence, span, bases, and subspace dimensions.}
+\source{Based on handwritten MIT 18.06 revision notes.}
+
+\section{Core Idea}
+
+\labelnote{Core idea}{Independence, span, and basis are all controlled by the equation \(Ax=0\), where the columns of \(A\) are the vectors being tested.}
+
+For vectors \(v_1,\ldots,v_n\), put them into a matrix
+\[
+A=\begin{bmatrix}v_1&v_2&\cdots&v_n\end{bmatrix}.
+\]
+Then the dependence test is
+\[
+x_1v_1+x_2v_2+\cdots+x_nv_n=0
+\qquad\Longleftrightarrow\qquad
+Ax=0.
+\]
+The vectors are independent exactly when the only solution is \(x=0\).
+
+\section{Independence and Dependence}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.28\linewidth}Y Y@{}}
+\toprule
+Situation & Meaning & Exam consequence \\
+\midrule
+Independent columns & \(Ax=0\) has only \(x=0\). & No free variables. \\
+Dependent columns & \(Ax=0\) has a nonzero solution. & At least one free variable. \\
+More columns than rows & \(n>m\). & Columns must be dependent. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\labelnote{Exam trigger}{To test whether vectors are independent, solve \(Ax=0\), not \(Ax=b\).}
+
+If \(Ax=0\) has a nonzero solution, that solution gives an explicit linear relation among the columns. For example,
+\[
+x_1v_1+x_2v_2+x_3v_3=0
+\]
+with some nonzero coefficient means one vector is forced by the others.
+
+\section{Span}
+
+The span is the set of all linear combinations of the given vectors:
+\[
+\operatorname{span}\{v_1,\ldots,v_k\}
+=\{c_1v_1+\cdots+c_kv_k\}.
+\]
+It answers the question: which vectors can be produced?
+
+\begin{center}
+\small
+\begin{tabularx}{0.82\linewidth}{@{}L{0.34\linewidth}Y@{}}
+\toprule
+Vectors in \(\mathbb{R}^2\) & Span \\
+\midrule
+\((1,0)^{T},\ (0,1)^{T}\) & All of \(\mathbb{R}^2\). \\
+\((1,0)^{T},\ (-1,0)^{T}\) & Only the \(x\)-axis. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\labelnote{Common mistake}{Having two vectors in \(\mathbb{R}^2\) does not automatically mean they span \(\mathbb{R}^2\). They must point in independent directions.}
+
+\section{Basis}
+
+A basis is a set of vectors that is both independent and spanning.
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.25\linewidth}Y Y@{}}
+\toprule
+Property & What it prevents & What it guarantees \\
+\midrule
+Independent & No repeated direction. & No vector is unnecessary. \\
+Spanning & No missing direction. & Every vector in the space is reachable. \\
+Basis & Both at once. & Coordinates are unique. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\labelnote{Exam memory}{A basis is the smallest spanning set and the largest independent set.}
+
+\section{Row Space and Column Space}
+
+For an \(m\times n\) matrix \(A\), the column vectors have length \(m\), while row vectors have length \(n\).
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.23\linewidth}Y L{0.18\linewidth}Y@{}}
+\toprule
+Space & Built from & Lives in & Basis rule \\
+\midrule
+Column space \(C(A)\) & Columns of \(A\). & \(\mathbb{R}^m\) & Use pivot columns of the original \(A\). \\
+Row space \(C(A^{T})\) & Rows of \(A\). & \(\mathbb{R}^n\) & Use nonzero rows of echelon form \(R\). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Example:
+\[
+A=
+\begin{bmatrix}
+2&4\\
+3&6
+\end{bmatrix},
+\qquad
+R=
+\begin{bmatrix}
+1&2\\
+0&0
+\end{bmatrix}.
+\]
+The row space can be represented from \(R\):
+\[
+C(A^{T})=\operatorname{span}\{(1,2)\}.
+\]
+The column space must use the pivot column from the original matrix:
+\[
+C(A)=\operatorname{span}\left\{
+\begin{bmatrix}2\\3\end{bmatrix}
+\right\}.
+\]
+
+\labelnote{Common mistake}{Do not use the pivot columns of \(R\) as a basis for \(C(A)\). Row operations change the columns, but they preserve the row space.}
+
+\section{Dimension and Rank}
+
+The dimension of a subspace is the number of vectors in a basis for that subspace.
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.24\linewidth}L{0.22\linewidth}Y@{}}
+\toprule
+Quantity & Value & Meaning \\
+\midrule
+\(\dim C(A)\) & \(r\) & Number of pivot columns. \\
+\(\dim C(A^{T})\) & \(r\) & Number of nonzero rows in \(R\). \\
+\(\dim N(A)\) & \(n-r\) & Number of free variables. \\
+\(\dim N(A^{T})\) & \(m-r\) & Number of missing pivots among rows. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The row space and column space have the same dimension:
+\[
+\dim C(A)=\dim C(A^{T})=r.
+\]
+They usually live in different spaces, so they are not the same subspace.
+
+\section{Four Fundamental Subspaces}
+
+For \(A\in\mathbb{R}^{m\times n}\), the four subspaces are:
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.24\linewidth}L{0.18\linewidth}L{0.18\linewidth}Y@{}}
+\toprule
+Subspace & Lives in & Dimension & How to find a basis \\
+\midrule
+Column space \(C(A)\) & \(\mathbb{R}^m\) & \(r\) & Pivot columns of \(A\). \\
+Row space \(C(A^{T})\) & \(\mathbb{R}^n\) & \(r\) & Nonzero rows of \(R\). \\
+Nullspace \(N(A)\) & \(\mathbb{R}^n\) & \(n-r\) & Special solutions of \(Ax=0\). \\
+Left nullspace \(N(A^{T})\) & \(\mathbb{R}^m\) & \(m-r\) & Special solutions of \(A^{T}y=0\). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\labelnote{Dimension check}{The dimensions split by ambient space: \(r+(n-r)=n\) in \(\mathbb{R}^n\), and \(r+(m-r)=m\) in \(\mathbb{R}^m\).}
+
+\section{Rank-One Reminder}
+
+A rank-one matrix is one column times one row:
+\[
+A=uv^{T}.
+\]
+For example,
+\[
+\begin{bmatrix}
+a\\b\\c
+\end{bmatrix}
+\begin{bmatrix}
+2&3&7&8
+\end{bmatrix}
+\]
+has rank \(1\) if both factors are nonzero.
+
+\labelnote{Exam use}{Rank-one matrices are useful because all columns are multiples of one vector and all rows are multiples of one row.}
+
+\section{Common Mistakes}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.40\linewidth}Y@{}}
+\toprule
+Mistake & Correct exam habit \\
+\midrule
+Testing independence with \(Ax=b\). & Test with \(Ax=0\). \\
+Forgetting that \(n>m\) forces dependence. & More vectors than dimension means at least one free variable. \\
+Using columns of \(R\) for \(C(A)\). & Use pivot columns of original \(A\). \\
+Saying row space and column space are the same. & They have the same dimension \(r\), but may live in different spaces. \\
+Counting all columns as a basis. & Count pivot columns only. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Final Exam Checklist}
+
+\tightlabel{Checklist}
+\begin{enumerate}
+  \item Write the size: \(A\) is \(m\times n\).
+  \item Put the vectors as columns if testing independence or span.
+  \item Solve \(Ax=0\) to test independence.
+  \item Find the rank \(r\) from pivots.
+  \item Use pivot columns of \(A\) for a basis of \(C(A)\).
+  \item Use nonzero rows of \(R\) for a basis of \(C(A^{T})\).
+  \item Use special solutions for a basis of \(N(A)\).
+  \item Check dimensions: \(r\), \(r\), \(n-r\), and \(m-r\).
+  \item State whether the vectors are independent, spanning, a basis, or dependent.
+\end{enumerate}
+
+\end{document}

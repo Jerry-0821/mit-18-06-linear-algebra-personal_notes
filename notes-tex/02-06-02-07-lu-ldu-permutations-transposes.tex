@@ -1,0 +1,171 @@
+\documentclass[10pt]{article}
+\input{../templates/exam-note-template.tex}
+
+\begin{document}
+
+\begin{center}
+{\LARGE 2.6--2.7 LU, LDU, Permutations, and Transposes\par}
+\end{center}
+\notesubtitle{Concise exam revision notes for elimination factorizations and matrix operation rules.}
+\source{Based on handwritten MIT 18.06 revision notes.}
+
+\section{Core Idea}
+
+\labelnote{Core idea}{Elimination can be stored as a factorization. Instead of redoing row operations, write the matrix as products of simple matrices.}
+
+Without row exchanges, elimination gives
+\[
+A=LU.
+\]
+If the pivots are separated into a diagonal matrix \(D\), then
+\[
+A=LDU.
+\]
+Here \(L\) stores elimination multipliers, \(D\) stores pivots, and \(U\) stores the final upper triangular structure.
+
+\section{Solving With LU}
+
+To solve
+\[
+Ax=b,
+\qquad A=LU,
+\]
+do two triangular solves:
+\[
+Lc=b,
+\qquad
+Ux=c.
+\]
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.25\linewidth}Y Y@{}}
+\toprule
+Step & Equation & Meaning \\
+\midrule
+Forward substitution & \(Lc=b\) & Apply stored elimination. \\
+Back substitution & \(Ux=c\) & Solve the upper triangular system. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\labelnote{Exam memory}{LU is useful because solving triangular systems is faster than starting elimination again.}
+
+\section{Permutations}
+
+If a row exchange is needed, use a permutation matrix:
+\[
+PA=LU.
+\]
+Permutation matrices reorder rows and satisfy
+\[
+P^{-1}=P^{T},
+\qquad
+P^{T}P=I.
+\]
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.30\linewidth}Y@{}}
+\toprule
+Fact & Meaning \\
+\midrule
+\(P^{-1}=P^{T}\) & Undoing a permutation is another permutation. \\
+\(P^{T}P=I\) & Permutations preserve lengths and dot products. \\
+\(PA\) & Reorders rows of \(A\). \\
+\(AP\) & Reorders columns of \(A\). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Transpose and Inverse Rules}
+
+Order reverses when transposing or inverting products:
+\[
+(AB)^{T}=B^{T}A^{T},
+\qquad
+(AB)^{-1}=B^{-1}A^{-1}.
+\]
+For an inverse transpose,
+\[
+(A^{-1})^{T}=(A^{T})^{-1}.
+\]
+
+\labelnote{Common mistake}{Do not transpose a product in the same order. The order must reverse.}
+
+\section{Symmetric Matrices}
+
+A matrix is symmetric when
+\[
+A^{T}=A.
+\]
+The product \(A^{T}A\) is always symmetric:
+\[
+(A^{T}A)^{T}=A^{T}A.
+\]
+The dot-product identity behind this is
+\[
+(Ax)^{T}y=x^{T}A^{T}y.
+\]
+
+\section{Block Transposes}
+
+Transpose works block by block and also swaps block positions:
+\[
+\begin{bmatrix}
+A&B\\
+C&D
+\end{bmatrix}^{T}
+=
+\begin{bmatrix}
+A^{T}&C^{T}\\
+B^{T}&D^{T}
+\end{bmatrix}.
+\]
+This is the same rule as ordinary transposes: rows become columns.
+
+\section{Banded Matrices}
+
+Banded matrices have nonzeros near the diagonal, so elimination can be cheaper when the band structure is preserved. A common example is tridiagonal structure:
+\[
+\begin{bmatrix}
+*&*&0&0\\
+*&*&*&0\\
+0&*&*&*\\
+0&0&*&*
+\end{bmatrix}.
+\]
+The exam habit is to use the structure instead of treating every entry as dense.
+
+\section{Common Mistakes}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.40\linewidth}Y@{}}
+\toprule
+Mistake & Correct exam habit \\
+\midrule
+Forgetting row exchanges in LU. & Use \(PA=LU\) when pivots require swaps. \\
+Solving \(LUx=b\) in one jump. & First solve \(Lc=b\), then \(Ux=c\). \\
+Writing \((AB)^{T}=A^{T}B^{T}\). & Reverse order: \(B^{T}A^{T}\). \\
+Assuming \(A^{T}A=A A^{T}\). & Both are symmetric, but usually different. \\
+Ignoring zeros in a banded matrix. & Use the sparsity pattern to simplify work. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Final Exam Checklist}
+
+\tightlabel{Checklist}
+\begin{enumerate}
+  \item Check whether row exchanges are needed.
+  \item Use \(A=LU\) if no row exchanges occur.
+  \item Use \(PA=LU\) if row exchanges occur.
+  \item Solve \(Lc=b\) by forward substitution.
+  \item Solve \(Ux=c\) by back substitution.
+  \item Reverse order when transposing or inverting products.
+  \item Check symmetry with \(A^{T}=A\).
+  \item Use banded or triangular structure when present.
+\end{enumerate}
+
+\end{document}

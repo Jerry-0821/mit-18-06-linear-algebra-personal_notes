@@ -1,0 +1,112 @@
+\documentclass[10pt]{article}
+\input{../templates/exam-note-template.tex}
+
+\begin{document}
+
+\begin{center}
+{\LARGE Eigenvalue Quick Reference\par}
+\end{center}
+\notesubtitle{Concise revision notes for eigenvalue equations, checks, and basic matrix types.}
+\source{Based on handwritten MIT 18.06 revision notes.}
+
+\section{Core Idea}
+
+\labelnote{Core idea}{Eigenvectors are directions that survive multiplication by \(A\). The matrix only stretches, shrinks, reverses, or rotates through a scalar factor.}
+
+The defining equation is
+\[
+Ax=\lambda x,
+\qquad x\ne0.
+\]
+Move all terms to one side:
+\[
+(A-\lambda I)x=0.
+\]
+For a nonzero solution, the matrix \(A-\lambda I\) must be singular:
+\[
+\det(A-\lambda I)=0.
+\]
+
+\section{Characteristic Equation}
+
+For a \(2\times2\) matrix, the characteristic equation can be written as
+\[
+\lambda^2-\operatorname{trace}(A)\lambda+\det A=0.
+\]
+This is often the fastest way to check arithmetic.
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.26\linewidth}Y@{}}
+\toprule
+Quantity & Eigenvalue check \\
+\midrule
+Trace & Sum of eigenvalues. \\
+Determinant & Product of eigenvalues. \\
+Zero eigenvalue & Matrix is singular. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Basic Examples}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.32\linewidth}Y@{}}
+\toprule
+Matrix type & Eigenvalue memory \\
+\midrule
+Projection \(P\) with \(P^2=P\) & Eigenvalues are \(0\) or \(1\). \\
+Permutation swapping two coordinates & Eigenvalues often include \(1\) and \(-1\). \\
+Plane rotation by \(90^\circ\) & Eigenvalues are complex: \(i\) and \(-i\). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Growth and Stability}
+
+For repeated multiplication \(A^k\):
+\[
+|\lambda|<1
+\]
+means decay in that eigenvector direction.
+
+\[
+|\lambda|>1
+\]
+means growth in that direction.
+
+\[
+\lambda=1
+\]
+means that direction stays fixed.
+
+\section{Common Mistakes}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.40\linewidth}Y@{}}
+\toprule
+Mistake & Correct exam habit \\
+\midrule
+Allowing \(x=0\) as an eigenvector. & Eigenvectors must be nonzero. \\
+Solving \(Ax=0\) for every eigenvector. & Solve \((A-\lambda I)x=0\). \\
+Forgetting trace and determinant checks. & Use them after solving for \(\lambda\). \\
+Assuming all rotations have real eigenvectors. & Plane rotations can have complex eigenvalues. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Final Exam Checklist}
+
+\tightlabel{Checklist}
+\begin{enumerate}
+  \item Write \(Ax=\lambda x\).
+  \item Form \(A-\lambda I\).
+  \item Solve \(\det(A-\lambda I)=0\).
+  \item Check trace and determinant.
+  \item For each \(\lambda\), solve \((A-\lambda I)x=0\).
+  \item Use \(|\lambda|\) to judge growth or decay for powers.
+\end{enumerate}
+
+\end{document}

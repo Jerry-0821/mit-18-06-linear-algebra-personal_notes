@@ -1,0 +1,154 @@
+\documentclass[10pt]{article}
+\input{../templates/exam-note-template.tex}
+
+\begin{document}
+
+\begin{center}
+{\LARGE 7.2 Singular Value Decomposition\par}
+\end{center}
+\notesubtitle{Exam notes for \(A=U\Sigma V^{T}\), singular values, and the four subspaces.}
+\source{Based on handwritten MIT 18.06 revision notes.}
+
+\section{Core Idea}
+
+\labelnote{Core idea}{The SVD writes any matrix as orthogonal input directions, nonnegative stretching, and orthogonal output directions.}
+
+For an \(m\times n\) matrix,
+\[
+A=U\Sigma V^{T}.
+\]
+Here \(V\) gives orthonormal directions in \(\mathbb{R}^n\), \(U\) gives orthonormal directions in \(\mathbb{R}^m\), and \(\Sigma\) contains the singular values.
+
+\section{What the SVD Says}
+
+\[
+Av_i=\sigma_i u_i.
+\]
+
+This means: the right singular vector \(v_i\) is sent to the left singular vector \(u_i\), scaled by \(\sigma_i\ge 0\).
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.22\linewidth}Y Y@{}}
+\toprule
+Object & Lives in & Meaning \\
+\midrule
+\(v_i\) & \(\mathbb{R}^n\) & Orthonormal input direction. \\
+\(u_i\) & \(\mathbb{R}^m\) & Orthonormal output direction. \\
+\(\sigma_i\) & Nonnegative number & Stretch factor from \(v_i\) to \(u_i\). \\
+\(\Sigma\) & \(m\times n\) diagonal shape & Stores singular values in decreasing order. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{How to Compute It}
+
+The right singular vectors come from the symmetric matrix \(A^{T}A\):
+\[
+A^{T}A v_i=\sigma_i^2 v_i.
+\]
+
+So the singular values are
+\[
+\sigma_i=\sqrt{\lambda_i(A^{T}A)}.
+\]
+
+For each \(\sigma_i>0\), compute the matching left singular vector by
+\[
+u_i=\frac{Av_i}{\sigma_i}.
+\]
+
+If \(U\) or \(V\) is not complete, add orthonormal vectors to finish the basis.
+
+\section{Geometry}
+
+The SVD is the clean geometric order:
+\[
+x
+\xrightarrow{\;V^{T}\;}
+\text{rotate/reflection}
+\xrightarrow{\;\Sigma\;}
+\text{stretch}
+\xrightarrow{\;U\;}
+\text{rotate/reflection}.
+\]
+
+The singular values show the principal stretches of the matrix.
+
+\section{Rank and the Four Subspaces}
+
+If \(\sigma_1,\ldots,\sigma_r>0\) and the rest are zero, then \(r=\operatorname{rank}(A)\).
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.25\linewidth}Y@{}}
+\toprule
+Subspace & Basis from the SVD \\
+\midrule
+Row space \(C(A^{T})\) & \(v_1,\ldots,v_r\). \\
+Nullspace \(N(A)\) & Remaining \(v_i\) with \(\sigma_i=0\). \\
+Column space \(C(A)\) & \(u_1,\ldots,u_r\). \\
+Left nullspace \(N(A^{T})\) & Remaining \(u_i\). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{SVD vs Eigenvalue Decomposition}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.24\linewidth}Y Y@{}}
+\toprule
+Feature & Eigenvalue decomposition & SVD \\
+\midrule
+Basic form & \(A=S\Lambda S^{-1}\) & \(A=U\Sigma V^{T}\) \\
+Works for & Diagonalizable square matrices & Every matrix \\
+Numbers & Eigenvalues may be negative or complex & Singular values are nonnegative real numbers \\
+Directions & Same space in and out & Input directions \(v_i\), output directions \(u_i\) \\
+Best use & Dynamics and powers & Geometry, rank, least squares, approximation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Symmetric Case}
+
+For a symmetric positive definite matrix,
+\[
+A=Q\Lambda Q^{T}
+\]
+already has orthonormal eigenvectors and positive eigenvalues. In this special case, the SVD agrees with the eigenvalue decomposition.
+
+For a symmetric matrix with negative eigenvalues, singular values use absolute sizes, not signs.
+
+\section{Common Mistakes}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.40\linewidth}Y@{}}
+\toprule
+Mistake & Correct exam habit \\
+\midrule
+Treating singular values as eigenvalues of \(A\). & Singular values come from \(A^{T}A\). \\
+Allowing negative singular values. & Always take \(\sigma_i\ge 0\). \\
+Using \(u_i=Av_i/\sigma_i\) when \(\sigma_i=0\). & Only divide by positive singular values. \\
+Forgetting rectangular dimensions. & \(\Sigma\) has the same shape as \(A\). \\
+Mixing up \(U\) and \(V\). & \(V\) belongs to the input side; \(U\) belongs to the output side. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Final Exam Checklist}
+
+\tightlabel{Checklist}
+\begin{enumerate}
+  \item Compute \(A^{T}A\).
+  \item Find eigenvalues and orthonormal eigenvectors of \(A^{T}A\).
+  \item Set \(\sigma_i=\sqrt{\lambda_i}\).
+  \item Put the \(v_i\)'s into \(V\).
+  \item Compute \(u_i=Av_i/\sigma_i\) for positive \(\sigma_i\).
+  \item Complete orthonormal bases when needed.
+  \item Write \(A=U\Sigma V^{T}\) with matching dimensions.
+  \item Use zero singular values to identify nullspaces.
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,185 @@
+\documentclass[10pt]{article}
+\input{../templates/exam-note-template.tex}
+
+\begin{document}
+
+\begin{center}
+{\LARGE 6.1--6.2 Eigenvalues, Eigenvectors, and Diagonalization\par}
+\end{center}
+\notesubtitle{Concise exam revision notes for eigenvectors, characteristic equations, powers, and stability.}
+\source{Based on handwritten MIT 18.06 revision notes.}
+
+\section{Core Idea}
+
+\labelnote{Core idea}{Most vectors change direction when multiplied by \(A\). Eigenvectors keep their direction; only their length and sign are scaled.}
+
+The defining equation is
+\[
+Ax=\lambda x,
+\qquad x\ne0.
+\]
+Equivalently,
+\[
+(A-\lambda I)x=0.
+\]
+So \(A-\lambda I\) must be singular:
+\[
+\det(A-\lambda I)=0.
+\]
+
+\section{How to Find Eigenvalues and Eigenvectors}
+
+\begin{enumerate}
+  \item Solve \(\det(A-\lambda I)=0\) to find eigenvalues.
+  \item For each eigenvalue, solve \((A-\lambda I)x=0\).
+  \item Use any nonzero vector in that nullspace as an eigenvector.
+\end{enumerate}
+
+\labelnote{Exam trigger}{Eigenvectors come from a nullspace. If the nullspace has more than one direction, choose a convenient basis.}
+
+\section{Fast Checks}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.25\linewidth}Y Y@{}}
+\toprule
+Check & Formula & Meaning \\
+\midrule
+Trace & \(\operatorname{trace}(A)=\lambda_1+\cdots+\lambda_n\) & Sum of eigenvalues. \\
+Determinant & \(\det A=\lambda_1\lambda_2\cdots\lambda_n\) & Product of eigenvalues. \\
+Invertibility & \(0\) is not an eigenvalue & Equivalent to \(\det A\ne0\). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+These checks catch arithmetic mistakes after solving the characteristic equation.
+
+\section{Special Matrices}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.26\linewidth}Y Y@{}}
+\toprule
+Matrix type & Typical eigenvalues & Exam memory \\
+\midrule
+Projection \(P\) & \(0\) and \(1\) & \(P^{2}=P\). \\
+Reflection \(R\) & \(1\) and \(-1\) & Directions along and across the mirror. \\
+Rotation in the plane & Usually complex & Real rotations may have no real eigenvectors. \\
+Triangular matrix & Diagonal entries & Read eigenvalues from the diagonal. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\labelnote{Common mistake}{Row reduction changes eigenvalues in general. Do not row-reduce \(A\) and read eigenvalues from the new matrix.}
+
+\section{Diagonalization}
+
+If \(A\) has \(n\) independent eigenvectors, put them into
+\[
+S=\begin{bmatrix}x_1&x_2&\cdots&x_n\end{bmatrix}.
+\]
+Then
+\[
+AS=S\Lambda,
+\qquad
+A=S\Lambda S^{-1}.
+\]
+Here
+\[
+\Lambda=
+\begin{bmatrix}
+\lambda_1&0&\cdots&0\\
+0&\lambda_2&\cdots&0\\
+\vdots&\vdots&\ddots&\vdots\\
+0&0&\cdots&\lambda_n
+\end{bmatrix}.
+\]
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.32\linewidth}Y@{}}
+\toprule
+Case & Diagonalization result \\
+\midrule
+\(n\) distinct eigenvalues & Automatically enough independent eigenvectors. \\
+Repeated eigenvalue & May or may not have enough eigenvectors. \\
+Not enough eigenvectors & Not diagonalizable. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\labelnote{Exam memory}{Repeated eigenvalues are not the problem by themselves. The issue is whether there are enough independent eigenvectors.}
+
+\section{Powers and Difference Equations}
+
+Diagonalization makes powers easy:
+\[
+A^{k}=S\Lambda^{k}S^{-1}.
+\]
+For a difference equation
+\[
+u_{k+1}=Au_k,
+\]
+the solution is
+\[
+u_k=A^ku_0=S\Lambda^kS^{-1}u_0.
+\]
+If
+\[
+u_0=c_1x_1+\cdots+c_nx_n,
+\]
+then
+\[
+u_k=c_1\lambda_1^kx_1+\cdots+c_n\lambda_n^kx_n.
+\]
+
+\section{Stability}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.30\linewidth}Y@{}}
+\toprule
+Eigenvalue behavior & Effect on \(A^k\) \\
+\midrule
+All \(|\lambda_i|<1\) & Decays to zero. \\
+Some \(|\lambda_i|>1\) & Blows up in that direction. \\
+\(|\lambda_i|=1\) & Borderline; behavior depends on the matrix. \\
+One \(\lambda=1\), rest \(|\lambda|<1\) & Possible steady state. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Common Mistakes}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}L{0.40\linewidth}Y@{}}
+\toprule
+Mistake & Correct exam habit \\
+\midrule
+Solving \(Ax=0\) for every eigenvector. & Solve \((A-\lambda I)x=0\). \\
+Forgetting \(x\ne0\). & Eigenvectors are never the zero vector. \\
+Assuming \(\lambda=0\) means diagonalizable fails. & It means \(A\) is singular; diagonalizability is separate. \\
+Assuming repeated eigenvalues always fail. & Count independent eigenvectors. \\
+Row-reducing \(A\) before finding eigenvalues. & Use \(\det(A-\lambda I)=0\). \\
+Confusing invertibility and diagonalizability. & Invertible means no zero eigenvalue; diagonalizable means enough eigenvectors. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Final Exam Checklist}
+
+\tightlabel{Checklist}
+\begin{enumerate}
+  \item Compute \(\det(A-\lambda I)\).
+  \item Solve for all eigenvalues \(\lambda\).
+  \item Check trace and determinant against the eigenvalues.
+  \item For each \(\lambda\), solve \((A-\lambda I)x=0\).
+  \item Count independent eigenvectors.
+  \item Diagonalize only if there are \(n\) independent eigenvectors.
+  \item Form \(S\) from eigenvectors and \(\Lambda\) from eigenvalues.
+  \item Use \(A^{k}=S\Lambda^{k}S^{-1}\) for powers.
+  \item Use \(|\lambda|\) to decide growth or decay in difference equations.
+\end{enumerate}
+
+\end{document}
