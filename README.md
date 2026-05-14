@@ -2,7 +2,7 @@
 
 Concise PDF exam notes for MIT 18.06 Linear Algebra, generated from my handwritten revision notes.
 
-These notes organize and polish my own handwritten understanding for exam preparation. They are not a formula cheat sheet, a textbook rewrite, or a complete public textbook. Other students may download the PDFs, but that is secondary.
+These notes organize and polish my own handwritten understanding for exam preparation. They are shared for study and revision use, but they are not a formula cheat sheet, a textbook rewrite, or a complete textbook replacement.
 
 ## Download Notes
 
@@ -64,14 +64,16 @@ Shared style template:
 templates/exam-note-template.tex
 ```
 
-## Source and Copyright Rules
+## Source, Use, and Copyright Notes
 
-- Main source: handwritten note PDFs in `18.06 note/`.
-- Textbook PDFs are reference-only for terminology and mathematical accuracy.
-- Do not copy textbook paragraphs, figures, screenshots, or examples.
-- Do not upload or commit copyrighted textbook PDFs.
-- Raw handwritten/source-reference PDFs are local input materials; the release repo is centered on `notes-tex/` and `notes-pdf/`.
-- The local `textbook/` folder is ignored by Git.
+These notes are shared for study and revision use. They are based on my own handwritten MIT 18.06 revision notes and are not meant to be a complete textbook replacement.
+
+- Main source: my handwritten MIT 18.06 revision notes.
+- The final downloadable file is `notes-pdf/mit-18-06-linear-algebra-exam-notes.pdf`.
+- Textbook/reference materials were used only to check terminology and mathematical accuracy.
+- No textbook paragraphs, figures, screenshots, or examples are copied.
+- Copyrighted textbook PDFs and raw source-reference PDFs are not included in this repository.
+- The LaTeX source files are included in `notes-tex/` for transparency and future editing.
 
 ## Project Philosophy
 
