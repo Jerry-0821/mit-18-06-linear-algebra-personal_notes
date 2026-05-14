@@ -1,5 +1,6 @@
 .codex-tmp/
 codex-tmp/
+.build/
 18.06 note/
 textbook/
 main.pdf

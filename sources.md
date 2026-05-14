@@ -2,7 +2,7 @@
 
 This project converts handwritten MIT 18.06 revision notes into concise English exam revision PDFs.
 
-The raw handwritten PDFs are local input materials. The release-ready outputs are the LaTeX sources in `notes-tex/` and the generated PDFs in `notes-pdf/`.
+The raw handwritten PDFs are local input materials. The release-ready output is the combined PDF in `notes-pdf/`, generated from the LaTeX sources in `notes-tex/`.
 
 ## Main Sources
 

@@ -6,29 +6,31 @@ These notes organize and polish my own handwritten understanding for exam prepar
 
 ## Download Notes
 
-Final PDFs live in `notes-pdf/`. Source files live in `notes-tex/`.
+The final download is one combined PDF: [mit-18-06-linear-algebra-exam-notes.pdf](notes-pdf/mit-18-06-linear-algebra-exam-notes.pdf).
 
-## Current PDFs
+Source files live in `notes-tex/`.
+
+## Contents
 
 ```text
-notes-pdf/02-06-02-07-lu-ldu-permutations-transposes.pdf
-notes-pdf/02-07-03-01-permutations-subspaces-rank-dot-products.pdf
-notes-pdf/03-02-03-03-nullspace-special-solutions-complete-solution.pdf
-notes-pdf/03-02-complete-solutions-worked-example.pdf
-notes-pdf/03-04-03-05-independence-basis-dimension-subspaces.pdf
-notes-pdf/04-01-orthogonality-four-fundamental-subspaces.pdf
-notes-pdf/04-02-04-03-projections-least-squares.pdf
-notes-pdf/04-04-05-01-05-02-orthonormal-bases-determinants.pdf
-notes-pdf/05-03-cramers-rule-cross-products-volume.pdf
-notes-pdf/06-01-06-02-eigenvalues-eigenvectors-diagonalization.pdf
-notes-pdf/06-01-eigenvalue-quick-reference.pdf
-notes-pdf/06-03-06-04-06-05-symmetric-matrices-positive-definite-similar-matrices.pdf
-notes-pdf/06-05-eigenvalue-patterns-common-matrices.pdf
-notes-pdf/06-06-jordan-blocks-defective-matrices.pdf
-notes-pdf/07-02-singular-value-decomposition.pdf
+2.6-2.7  LU, LDU, Permutations, and Transposes
+2.7-3.1  Permutations, Subspaces, Rank, and Dot Products
+3.2-3.3  Nullspace, Special Solutions, and Complete Solutions
+3.2      Complete Solutions Worked Example
+3.4-3.5  Independence, Basis, Dimension, and Subspaces
+4.1      Orthogonality and the Four Fundamental Subspaces
+4.2-4.3  Projections and Least Squares
+4.4-5.2  Orthonormal Bases, QR, and Determinants
+5.3      Inverses, Cramer's Rule, Cross Products, and Volume
+6.1-6.2  Eigenvalues, Eigenvectors, and Diagonalization
+6.1      Eigenvalue Quick Reference
+6.3-6.5  Matrix Exponentials, Symmetric Matrices, and Positive Definiteness
+6.5      Eigenvalue Patterns for Common Matrix Types
+6.6      Jordan Blocks and Defective Matrices
+7.2      Singular Value Decomposition
 ```
 
-The shorter quick-reference PDFs intentionally overlap with a few longer topic notes. They are kept as compact review sheets.
+The shorter quick-reference notes intentionally overlap with a few longer topic notes. They are included as compact review sections in the combined PDF.
 
 ## Build Instructions
 
@@ -38,14 +40,17 @@ Requirements:
 
 - Python 3.
 - Tectonic available on `PATH`, or set the `TECTONIC` environment variable to the Tectonic executable.
+- Python package `pypdf` for merging section PDFs.
 
-Rebuild every PDF from the project root:
+Rebuild the combined PDF from the project root:
 
 ```powershell
 python scripts\build_all_notes.py
 ```
 
-Build one PDF:
+The script builds temporary section PDFs in `.build/section-pdfs/`, then merges them into `notes-pdf/mit-18-06-linear-algebra-exam-notes.pdf`.
+
+Build one section PDF manually:
 
 ```powershell
 python scripts\build_exam_note.py `
